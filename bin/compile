@@ -180,8 +180,10 @@ function bloom_vendor() {
   package="https://s3.amazonaws.com/bloom-vulcan/$binary"
   curl $package -s -o - | tar xz -C $path -f -
 
-  export CPPPATH="$1/$CAIRO_VENDOR/$include:$CPPPATH"
-  export CPATH="$1/$CAIRO_VENDOR/$include:$CPATH"
+  echo "       Exporting $binary build and include paths"
+
+  export CPPPATH="$path/$include:$CPPPATH"
+  export CPATH="$path/$include:$CPATH"
   export LIBPATH="$path/lib:$LIBPATH"
   export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
