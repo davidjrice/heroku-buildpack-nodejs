@@ -167,24 +167,30 @@ INCLUDE_PATH="$VENDORED_NODE/include"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 
-# bloom additions: get cairo and pixman into the vendor folder for npm
+# bloom additions for node-canvas:
+# get cairo and pixman into the vendor folder before npm
+# watch out for CPPPATH/CPATH/LIBPATH, each library can vary
+
+function bloom_vendor() {
+  binary="$1"
+  path="$2"
+  include="$3"
+
+  mkdir -p $path
+  package="https://s3.amazonaws.com/bloom-vulcan/$binary"
+  curl $package -s -o - | tar xz -C $path -f -
+
+  export CPPPATH="$1/$CAIRO_VENDOR/$include:$CPPPATH"
+  export CPATH="$1/$CAIRO_VENDOR/$include:$CPATH"
+  export LIBPATH="$path/lib:$LIBPATH"
+  export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
+}
+
 echo "-----> Fetching Cairo binaries"
-CAIRO_BINARY="https://s3.amazonaws.com/bloom-vulcan/cairo-1.10.2.tgz"
-CAIRO_VENDOR="vendor/cairo-1.10.2"
-mkdir -p $1/$CAIRO_VENDOR
-curl $CAIRO_BINARY -s -o - | tar -xz -C $1/$CAIRO_VENDOR -f -
-export PKG_CONFIG_PATH="$1/$CAIRO_VENDOR/lib/pkgconfig:$PKG_CONFIG_PATH"
-export CPPPATH="$1/$CAIRO_VENDOR/include/cairo:$CPPPATH"
-export CPATH="$1/$CAIRO_VENDOR/include/cairo:$CPATH"
+bloom_vendor "cairo-1.10.2.tgz" "$1/vendor/cairo-1.10.2" "include/cairo"
 
 echo "-----> Fetching Pixman binaries"
-PIXMAN_BINARY="https://s3.amazonaws.com/bloom-vulcan/pixman-0.20.2.tgz"
-PIXMAN_VENDOR="vendor/pixman-0.20.2"
-mkdir -p $1/$PIXMAN_VENDOR
-curl $PIXMAN_BINARY -s -o - | tar -xz -C $1/$PIXMAN_VENDOR -f -
-export PKG_CONFIG_PATH="$1/$PIXMAN_VENDOR/lib/pkgconfig:$PKG_CONFIG_PATH"
-export CPPPATH="$1/$PIXMAN_VENDOR/include/pixman-1:$CPPPATH"
-export CPATH="$1/$PIXMAN_VENDOR/include/pixman-1:$CPATH"
+bloom_vendor "pixman-0.20.2.tgz" "$1/vendor/pixman-0.20.2" "include/pixman-1"
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
