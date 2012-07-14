@@ -185,17 +185,13 @@ function bloom_vendor() {
 
   export CPPPATH="$path/$include:$CPPPATH"
   export CPATH="$path/$include:$CPATH"
-  export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
+  export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
   export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
 echo "-----> Vendoring Cairo"
 bloom_vendor "cairo-1.10.2.tgz" "$1/vendor/cairo-1.10.2" "include/cairo"
 bloom_vendor "pixman-0.20.2.tgz" "$1/vendor/pixman-0.20.2" "include/pixman-1"
-
-# FIXME: into bloom_vendor if this works?
-export LD_PRELOAD="$1/vendor/cairo-1.10.2/lib/libcairo.so:$LD_PRELOAD"
-export LD_PRELOAD="$1/vendor/pixman-0.20.2/lib/libpixman-1.so.0:$LD_PRELOAD"
 
 # debug
 echo "       CPATH=$CPATH"
