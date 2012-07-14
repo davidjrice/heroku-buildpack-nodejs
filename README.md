@@ -1,3 +1,14 @@
+Cairo Branch
+============
+
+This is bloomtime's branch of [Heroku's official node.js buildpack](https://github.com/heroku/heroku-buildpack-nodejs). 
+
+We've added `cairo` and `pixman` to the `vendor` folder so you can run `node-canvas` on Heroku.
+
+See https://github.com/heroku/vulcan/issues/20 for how the binaries were built, and assume it will get easier.
+
+See https://devcenter.heroku.com/articles/buildpack-binaries for how to do your own custom buildpack.
+
 Heroku buildpack: Node.js
 =========================
 
