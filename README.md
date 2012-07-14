@@ -5,9 +5,10 @@ This is bloomtime's branch of [Heroku's official node.js buildpack](https://gith
 
 We've added `cairo` and `pixman` to the `vendor` folder so you can run `node-canvas` on Heroku.
 
-See https://github.com/heroku/vulcan/issues/20 for how the binaries were built, and assume it will get easier.
+Simply do `heroku config:add BUILDPACK_URL=git://github.com/bloomtime/heroku-buildpack-nodejs.git#cairo` and push as normal.
 
-See https://devcenter.heroku.com/articles/buildpack-binaries for how to do your own custom buildpack.
+See [vulcan issue 20](https://github.com/heroku/vulcan/issues/20) for how the binaries were built, and assume it will get easier. See [Heroku's Devcenter](https://devcenter.heroku.com/articles/buildpack-binaries) for how to do your own custom buildpack.
+
 
 Heroku buildpack: Node.js
 =========================
