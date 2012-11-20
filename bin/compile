@@ -185,7 +185,9 @@ function bloom_vendor() {
 
   export CPPPATH="$path/$include:$CPPPATH"
   export CPATH="$path/$include:$CPATH"
-  export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
+  export PATH="$path/lib:$PATH"
+  export LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="-L$path/lib:$LD_LIBRARY_PATH"
   export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
