@@ -189,21 +189,18 @@ function bloom_vendor() {
   export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
-function rumble_copy() {
-  binary="$1"
-  src="$2"
-  dest="$2"
-  echo "       Copying $binary from $src to $dest"
-  cp -R $src $dest
+function rumble_pkg_check() {
+  library="$1"
+  result =`pkg-config $library`
 }
 
 echo "-----> Vendoring Cairo"
 bloom_vendor "cairo-1.12.8.tgz" "$1/vendor/cairo-1.12.8" "include/cairo"
 bloom_vendor "pixman-0.28.0.tgz" "$1/vendor/pixman-0.28.0" "include/pixman-1"
 
-echo "-----> Copying binaries (Hackity hack)"
-rumble_copy "cairo-1.12.8" "$1/vendor/cairo-1.12.8" "/app/vendor/cairo-1.12.8"
-rumble_copy "pixman-0.28.0" "$1/vendor/pixman-0.28.0" "/app/vendor/pixman-0.28.0"
+echo "-----> Checking pgk-config"
+rumble_pkg_check "cairo"
+rumble_pkg_check "pixman-1"
 
 
 # install dependencies with npm
