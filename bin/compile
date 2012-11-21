@@ -178,7 +178,7 @@ function bloom_vendor() {
 
   echo "       Fetching $binary"
   mkdir -p $path
-  package="https://s3.amazonaws.com/bloom-vulcan/$binary"
+  package="https://s3.amazonaws.com/rumble-vulcan/$binary"
   curl $package -s -o - | tar xz -C $path -f -
 
   echo "       Exporting $binary build and include paths"
