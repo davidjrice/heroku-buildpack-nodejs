@@ -191,14 +191,15 @@ function bloom_vendor() {
 
 function rumble_pkg_check() {
   library="$1"
-  result=`pkg-config $library`
+  result=`pkg-config $library --libs`
+  echo $result
 }
 
 echo "-----> Vendoring Cairo"
 bloom_vendor "cairo-1.12.8.tgz" "$1/vendor/cairo-1.12.8" "include/cairo"
 bloom_vendor "pixman-0.28.0.tgz" "$1/vendor/pixman-0.28.0" "include/pixman-1"
 
-echo "-----> Checking pgk-config"
+echo "-----> Checking pkg-config"
 rumble_pkg_check "cairo"
 rumble_pkg_check "pixman-1"
 
