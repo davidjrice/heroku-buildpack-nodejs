@@ -191,7 +191,7 @@ function bloom_vendor() {
 
 function rumble_pkg_check() {
   library="$1"
-  result =`pkg-config $library`
+  result=`pkg-config $library`
 }
 
 echo "-----> Vendoring Cairo"
