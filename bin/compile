@@ -178,16 +178,14 @@ function bloom_vendor() {
 
   echo "       Fetching $binary"
   mkdir -p $path
-  package="https://s3.amazonaws.com/rumble-vulcan/$binary"
+  package="https://s3.amazonaws.com/bloom-vulcan/$binary"
   curl $package -s -o - | tar xz -C $path -f -
 
   echo "       Exporting $binary build and include paths"
 
   export CPPPATH="$path/$include:$CPPPATH"
   export CPATH="$path/$include:$CPATH"
-  export PATH="$path/lib:$PATH"
-  export LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
-  export LD_LIBRARY_PATH="-L$path/lib:$LD_LIBRARY_PATH"
+  export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
   export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
 }
 
