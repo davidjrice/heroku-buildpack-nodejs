@@ -198,11 +198,15 @@ function rumble_pkg_check() {
 }
 
 echo "-----> Vendoring Cairo"
-bloom_vendor "cairo-1.12.8.tgz" "$1/vendor/cairo-1.12.8" "include"
-bloom_vendor "pixman-0.28.0.tgz" "$1/vendor/pixman-0.28.0" "include"
+# bloom_vendor "cairo-1.12.8.tgz" "$1/vendor/cairo-1.12.8" "include"
+# bloom_vendor "pixman-0.28.0.tgz" "$1/vendor/pixman-0.28.0" "include"
 
-echo "-----> Checking pkg-config"
+echo "-----> Checking config"
+echo $CPPPATH
+echo $CPATH
+echo $LIBRARY_PATH
 echo $PKG_CONFIG_PATH
+echo $CFLAGS
 # rumble_pkg_check "cairo"
 # rumble_pkg_check "pixman-1"
 
