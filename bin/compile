@@ -177,6 +177,7 @@ function bloom_vendor() {
   include="$3"
 
   echo "       Fetching $binary"
+  echo $path
   mkdir -p $path
   package="https://s3.amazonaws.com/rumble-vulcan/$binary"
   curl $package -s -o - | tar xz -C $path -f -
@@ -199,7 +200,8 @@ echo "-----> Vendoring Cairo"
 bloom_vendor "cairo-1.12.8.tgz" "$1/vendor/cairo-1.12.8" "include/cairo"
 bloom_vendor "pixman-0.28.0.tgz" "$1/vendor/pixman-0.28.0" "include/pixman-1"
 
-# echo "-----> Checking pkg-config"
+echo "-----> Checking pkg-config"
+echo $PKG_CONFIG_PATH
 # rumble_pkg_check "cairo"
 # rumble_pkg_check "pixman-1"
 
@@ -208,6 +210,8 @@ export PIXMAN_INCLUDE_PATH="$1/vendor/pixman-0.28.0/include"
 
 export CAIRO_LIB_LOAD="-L$1/vendor/cairo-1.12.8/lib -lcairo"
 export PIXMAN_LIB_LOAD="-L$1/vendor/pixman-0.28.0/lib -lpixman-1"
+
+export PKG_CONFIG_PATH="-L$1/vendor/pixman-0.28.0/lib -lpixman-1"
 
 
 # install dependencies with npm
