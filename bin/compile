@@ -187,7 +187,8 @@ function bloom_vendor() {
   export CPPPATH="$path/$include:$CPPPATH"
   export CPATH="$path/$include:$CPATH"
   export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
-  # export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
+  export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
+  export CFLAGS="-I$path/include:$CFLAGS"
 }
 
 function rumble_pkg_check() {
@@ -205,9 +206,9 @@ echo $PKG_CONFIG_PATH
 # rumble_pkg_check "cairo"
 # rumble_pkg_check "pixman-1"
 
-echo "-----> Copying binaries to /app/vendor"
-cp -R "$1/vendor/cairo-1.12.8" "/app/vendor/cairo-1.12.8"
-cp -R "$1/vendor/pixman-0.28.0" "/app/vendor/pixman-0.28.0"
+# echo "-----> Copying binaries to /app/vendor"
+# cp -R "$1/vendor/cairo-1.12.8" "/app/vendor/cairo-1.12.8"
+# cp -R "$1/vendor/pixman-0.28.0" "/app/vendor/pixman-0.28.0"
 
 export CAIRO_INCLUDE_PATH="$1/vendor/cairo-1.12.8/include"
 export PIXMAN_INCLUDE_PATH="$1/vendor/pixman-0.28.0/include"
